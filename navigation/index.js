@@ -6,6 +6,7 @@ import { useState } from "react";
 import Register from "../screens/register";
 import Login from "../screens/login";
 import BottomTabNavigator from "./bottomtab";
+import ListingScreen from "../screens/listing";
 
 const MainStack = createStackNavigator();
 
@@ -13,10 +14,13 @@ const LoggedIn = () => {
   return (
     <MainStack.Navigator
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
       }}
     >
-      <MainStack.Screen name="BottomTab" component={BottomTabNavigator} />
+      <MainStack.Screen options={{
+        // header
+      }} name="BottomTab" component={BottomTabNavigator} />
+      <MainStack.Screen name="Listing" component={ListingScreen} />
     </MainStack.Navigator>
   );
 };

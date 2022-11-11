@@ -1,8 +1,8 @@
 import { Layout, Button,Text } from '@ui-kitten/components';
 
-const ScanScreen = ({navigation}) => (
+const ListingScreen = ({navigation}) => (
     <Layout style={{ flex: 1, justifyContent: 'center' }}>
-      <Text category='h1'>Scan</Text>
+      <Text category='h1'>Listing</Text>
       <Button onPress={() => {
         // navigation.navigate("Register")
       }}>
@@ -11,4 +11,4 @@ const ScanScreen = ({navigation}) => (
     </Layout>
 );
 
-export default ScanScreen;
+export default ListingScreen;

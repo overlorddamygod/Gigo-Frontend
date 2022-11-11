@@ -4,7 +4,7 @@ const MoreScreen = ({navigation}) => (
     <Layout style={{ flex: 1, justifyContent: 'center' }}>
       <Text category='h1'>More</Text>
       <Button onPress={() => {
-        navigation.navigate("Register")
+        // navigation.navigate("Register")
       }}>
     {evaProps => <Text {...evaProps}>BUTTON</Text>}
     </Button>

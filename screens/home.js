@@ -2,11 +2,11 @@ import { Layout, Button,Text } from '@ui-kitten/components';
 
 const HomeScreen = ({navigation}) => (
     <Layout style={{ flex: 1, justifyContent: 'center' }}>
-      <Text category='h1'>USERS</Text>
+      <Text category='h1'>Home</Text>
       <Button onPress={() => {
-        navigation.navigate("Register")
+        navigation.navigate("Listing")
       }}>
-    {evaProps => <Text {...evaProps}>BUTTON</Text>}
+    {evaProps => <Text {...evaProps}>Listings</Text>}
     </Button>
     </Layout>
 );
