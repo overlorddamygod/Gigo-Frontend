@@ -1,5 +1,5 @@
-import { Text, Input, Spinner } from "@ui-kitten/components";
-import { Button } from "react-native";
+import { Text, Input, Spinner,Button } from "@ui-kitten/components";
+// import { Button } from "react-native";
 import { useState } from "react";
 import SafeAreaView from "../components/SafeAreaView";
 import showToast from "../utils/toast";
@@ -7,8 +7,8 @@ import { axiosInstance } from "../utils/axios";
 import useUserStore from "../store";
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("pratik@gmail.com");
-  const [password, setPassword] = useState("182blink");
+  const [email, setEmail] = useState("overlord123@gmail.com");
+  const [password, setPassword] = useState("overlord123");
   const [loading, setLoading] = useState(false);
   const setToken = useUserStore((store) => store.setToken)
 
@@ -54,7 +54,7 @@ const LoginScreen = ({ navigation }) => {
             onChangeText={(nextValue) => setPassword(nextValue)}
           ></Input>
 
-          <Button title="Login" appearance="outline" onPress={initLogin} />
+          <Button onPress={initLogin}>Login</Button>
 
           <Text>
             Don't have an account?

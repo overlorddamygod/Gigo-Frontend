@@ -2,18 +2,25 @@ import {
   Text,
   Input,
   Spinner,
+  Select,
+  SelectItem,
+  IndexPath,
+  Button
 } from "@ui-kitten/components";
-import { Button } from "react-native";
+import { AsyncStorage } from "react-native";
 import { useState } from "react";
 import SafeAreaView from "../components/SafeAreaView";
 import showToast from "../utils/toast";
+import ROLES from "../constant/roles";
+import { axiosInstance } from "../utils/axios";
 
 const RegisterScreen = ({navigation}) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [username, setUsername] = useState("overlord123");
+  const [email, setEmail] = useState("overlord123@gmail.com");
+  const [password1, setPassword1] = useState("overlord123");
+  const [password2, setPassword2] = useState("overlord123");
   const [registering, setRegistering] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
 
   const initRegister = async () => {
     if (!username.trim()) {
@@ -34,13 +41,27 @@ const RegisterScreen = ({navigation}) => {
     }
     setRegistering(true);
     try {
-      // TODO: Register user
-    } catch (err) {
-    } finally {
+      const {data} = await axiosInstance.post("users/register/", {
+        username: username,
+        email: email,
+        password: password1,
+        password_confirm: password2,
+        role: ROLES[selectedIndex.row],
+      })
+      console.log("Register", {data})
+      showToast("Registered successfully. Please Log in.");
+
+      await AsyncStorage.setItem(`pk_${data.data.username}`, data.private_key)
       setTimeout(() => {
+        navigation.navigate("Login");
+      }, 500);
+      // setToken(data.access)
+    } catch (err) {
+      // console.log(JSON.stringify(err))
+      console.log(err.response?.data?.detail)
+      showToast(err.response?.data?.detail);
+    } finally {
         setRegistering(false);
-        
-      }, 2000);
     }
   };
   return (
@@ -72,11 +93,18 @@ const RegisterScreen = ({navigation}) => {
             placeholder="Confirm Password"
             onChangeText={(nextValue) => setPassword2(nextValue)}
           ></Input>
-          <Button
-            title="Register"
-            appearance="outline"
-            onPress={initRegister}
-          />
+          <Select
+           selectedIndex={selectedIndex}
+           value={ROLES[selectedIndex.row]}
+            onSelect={index => {
+            setSelectedIndex(index)
+          }}>
+            {ROLES.map(role => {
+              return <SelectItem key={role} title={role} value={role}/>
+            })}
+            </Select>
+            <Button onPress={initRegister}>Register</Button>
+
           <Text>
               Already have an account?
               <Text

@@ -1,3 +1,4 @@
 const BASE_URL = "http://100.101.164.180:8000/"
+const BASE_URL_NOSLASH = "http://100.101.164.180:8000"
 
-export {BASE_URL}
+export {BASE_URL,BASE_URL_NOSLASH}

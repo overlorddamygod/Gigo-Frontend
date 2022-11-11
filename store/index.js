@@ -29,6 +29,7 @@ const useUserStore = create((set, get) => ({
         role: data.role,
         irohaName: data.iroha_name,
         name: data.username,
+        qrCode: data.qr_code,
         email: data.email,
       }));
 

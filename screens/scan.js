@@ -4,6 +4,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useState, useEffect } from "react";
 import { View, Image } from "react-native";
+import useUserStore from "../store";
+import {  BASE_URL_NOSLASH } from "../constant/urls";
 
 const QrTabStates = {
   SCAN: "SCAN",
@@ -131,21 +133,23 @@ const ScanQR = ({ navigation }) => {
 };
 
 const MyQR = () => {
+  const qr = useUserStore((store) => store.qrCode)
   return (
     <>
       <Text>My QR</Text>
       <Layout style={{
         flex:1,
-        backgroundColor:"red",
+        // backgroundColor:"red",
         justifyContent:"center",
         alignItems:"center",
+        padding:20
         // height: 100,
         // width:100,
       }}>
         <Image
-          style={{ height: "40%", width:"40%" }}
+          style={{ height: 200, width:200 }}
           source={{
-            uri: "https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=gigo://username",
+            uri: BASE_URL_NOSLASH + qr,
           }}
         />
       </Layout>
