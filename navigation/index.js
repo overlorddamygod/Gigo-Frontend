@@ -3,12 +3,13 @@ import {
   createStackNavigator,
 } from "@react-navigation/stack";
 import { useState } from "react";
-import Register from "../screens/register";
-import Login from "../screens/login";
+
 import BottomTabNavigator from "./bottomtab";
 import ListingScreen from "../screens/listing";
 import useUserStore from "../store";
 import RewardScreen from "../screens/reward";
+import RegisterScreen from "../screens/register";
+import LoginScreen from "../screens/login";
 
 const MainStack = createStackNavigator();
 
@@ -35,15 +36,17 @@ const NotLoggedIn = () => {
         headerShown: false,
       }}
     >
-      <MainStack.Screen name="Register" component={Register} />
-      <MainStack.Screen name="Login" component={Login} />
+      <MainStack.Screen name="Login" component={LoginScreen} />
+      <MainStack.Screen name="Register" component={RegisterScreen} />
     </MainStack.Navigator>
   );
 };
 
 function MainNavigator() {
-  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
-  console.log("SAD",isLoggedIn)
+  const token = useUserStore((state) => state.token);
+
+  const isLoggedIn = () => !!token
+  // console.log("SAD",isLoggedIn)
   return <>{isLoggedIn() ? <LoggedIn /> : <NotLoggedIn />}</>;
 }
 

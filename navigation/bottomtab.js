@@ -20,7 +20,7 @@ const BottomTabBar = ({ navigation, state }) => (
 const BottomTabNavigator = () => (
     <Navigator tabBar={props => <BottomTabBar {...props} />}>
       <Screen name="Home" component={HomeScreen}/>
-      <Screen name="Scan" component={ScanScreen}/>
+      <Screen name="Scan" component={ScanScreen} options={{unmountOnBlur: true}}/>
       <Screen name="More" component={MoreScreen}/>
       {/* <Screen name='Orders' component={OrdersScreen}/> */}
     </Navigator>

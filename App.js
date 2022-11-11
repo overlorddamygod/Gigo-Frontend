@@ -26,12 +26,31 @@ import { NavigationContainer } from '@react-navigation/native';
 // import { BottomNavigation, BottomNavigationTab, Layout, Text } from '@ui-kitten/components';
 import HomeScreen from './screens/home';
 import MainNavigator from './navigation';
+import { AsyncStorage } from 'react-native';
+import useUserStore from './store';
 
-export default () => (
+import {useEffect} from 'react';
+export default () => {
+  const setToken = useUserStore((store) => store.setToken)
+
+  useEffect(() => {
+    AsyncStorage.getItem('user:token').then((data) => {
+      if (data) {
+        setToken(data);
+      }
+    })
+  
+    return () => {
+      
+    }
+  }, [])
+  
+  return (
+  
   <ApplicationProvider {...eva} theme={eva.light}>
     {/* <HomeScreen /> */}
     <NavigationContainer>
       <MainNavigator/>
     </NavigationContainer>
   </ApplicationProvider>
-);
+)};
