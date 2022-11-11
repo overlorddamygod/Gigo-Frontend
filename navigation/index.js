@@ -23,7 +23,7 @@ const LoggedIn = () => {
       <MainStack.Screen options={{
         // header
       }} name="BottomTab" component={BottomTabNavigator} />
-      <MainStack.Screen name="Listing" component={ListingScreen} />
+      {/* <MainStack.Screen name="Listing" component={ListingScreen} /> */}
       <MainStack.Screen name="Reward" component={RewardScreen} />
     </MainStack.Navigator>
   );
