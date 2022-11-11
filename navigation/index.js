@@ -10,6 +10,7 @@ import useUserStore from "../store";
 import RewardScreen from "../screens/reward";
 import RegisterScreen from "../screens/register";
 import LoginScreen from "../screens/login";
+import CompanyScreen from "../screens/company";
 
 const MainStack = createStackNavigator();
 
@@ -23,7 +24,7 @@ const LoggedIn = () => {
       <MainStack.Screen options={{
         // header
       }} name="BottomTab" component={BottomTabNavigator} />
-      {/* <MainStack.Screen name="Listing" component={ListingScreen} /> */}
+      <MainStack.Screen name="Company" component={CompanyScreen} />
       <MainStack.Screen name="Reward" component={RewardScreen} />
     </MainStack.Navigator>
   );

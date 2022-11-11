@@ -1,9 +1,11 @@
 import { Card, Text } from "@ui-kitten/components"
 import { Image } from 'react-native';
 
-const Listing = ({ listing }) => {
+const Listing = ({ navigation, listing }) => {
   return (
-    <Card>
+    <Card onPress={() => {
+      navigation.navigate("Company", { listing })
+    }}>
         <Image style={{height:100}} source={{
             uri: listing.avatar
         }}/>

@@ -4,6 +4,7 @@ import HomeScreen from '../screens/home';
 import ListingScreen from '../screens/listing';
 import MoreScreen from '../screens/more';
 import ScanScreen from '../screens/scan';
+import { AntDesign, Feather } from "@expo/vector-icons";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -11,10 +12,12 @@ const BottomTabBar = ({ navigation, state }) => (
     <BottomNavigation
       selectedIndex={state.index}
       onSelect={index => navigation.navigate(state.routeNames[index])}>
-      <BottomNavigationTab title='Home'/>
-      <BottomNavigationTab title='Search'/>
-      <BottomNavigationTab title='Scan'/>
-      <BottomNavigationTab title='More'/>
+      <BottomNavigationTab title='Home' icon={() => {
+        return <AntDesign name="home" size={24} color="black" />
+      }}/>
+      <BottomNavigationTab title='Search' icon={<AntDesign name="search1" size={24} color="black" />}/>
+      <BottomNavigationTab title='Scan' icon={<AntDesign name="qrcode" size={24} color="black" />}/>
+      <BottomNavigationTab title='More' icon={<Feather name="more-horizontal" size={24} color="black" />}/>
       {/* <BottomNavigationTab title='ORDERS'/> */}
     </BottomNavigation>
 );
