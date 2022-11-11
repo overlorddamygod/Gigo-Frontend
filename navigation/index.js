@@ -7,6 +7,8 @@ import Register from "../screens/register";
 import Login from "../screens/login";
 import BottomTabNavigator from "./bottomtab";
 import ListingScreen from "../screens/listing";
+import useUserStore from "../store";
+import RewardScreen from "../screens/reward";
 
 const MainStack = createStackNavigator();
 
@@ -21,6 +23,7 @@ const LoggedIn = () => {
         // header
       }} name="BottomTab" component={BottomTabNavigator} />
       <MainStack.Screen name="Listing" component={ListingScreen} />
+      <MainStack.Screen name="Reward" component={RewardScreen} />
     </MainStack.Navigator>
   );
 };
@@ -39,8 +42,9 @@ const NotLoggedIn = () => {
 };
 
 function MainNavigator() {
-  const [isLogged, setIsLogged] = useState(true);
-  return <>{isLogged ? <LoggedIn /> : <NotLoggedIn />}</>;
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  console.log("SAD",isLoggedIn)
+  return <>{isLoggedIn() ? <LoggedIn /> : <NotLoggedIn />}</>;
 }
 
 export default MainNavigator;

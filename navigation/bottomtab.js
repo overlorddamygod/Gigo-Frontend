@@ -12,7 +12,7 @@ const BottomTabBar = ({ navigation, state }) => (
       onSelect={index => navigation.navigate(state.routeNames[index])}>
       <BottomNavigationTab title='Home'/>
       <BottomNavigationTab title='Scan'/>
-      <BottomNavigationTab title='More'/>   
+      <BottomNavigationTab title='More'/>
       {/* <BottomNavigationTab title='ORDERS'/> */}
     </BottomNavigation>
 );
