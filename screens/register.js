@@ -17,10 +17,10 @@ import { height, width } from "../constant/size";
 import LogoIcon from "../assets/logo_a.png";
 
 const RegisterScreen = ({ navigation }) => {
-  const [username, setUsername] = useState("overlord123");
-  const [email, setEmail] = useState("overlord123@gmail.com");
-  const [password1, setPassword1] = useState("overlord123");
-  const [password2, setPassword2] = useState("overlord123");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
   const [registering, setRegistering] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
 

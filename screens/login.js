@@ -15,8 +15,8 @@ const LoadingIndicator = (props) => (
 );
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("overlord123@gmail.com");
-  const [password, setPassword] = useState("overlord123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const setToken = useUserStore((store) => store.setToken);
 
