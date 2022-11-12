@@ -6,6 +6,7 @@ import { axiosInstance } from "../utils/axios";
 import showToast from "../utils/toast";
 
 const CompanyScreen = ({ route: { params } }) => {
+  const [is_subscribed, setIs_subscribed] = useState(params.listing.have_i_subscribed)
   const subscribe = async () => {
     // call subscribe api with company id
     try {
@@ -14,6 +15,7 @@ const CompanyScreen = ({ route: { params } }) => {
       });
       console.log("SUBSCRIBE", data);
       showToast("Subscribedddd");
+      setIs_subscribed(true)
     } catch (err) {
       console.log("SUBSCRIBE ERROR", err.response?.data);
       showToast("Failed to subscribe", err.response?.data);
@@ -25,10 +27,11 @@ const CompanyScreen = ({ route: { params } }) => {
       const { data } = await axiosInstance.post("/wsystem/unsubscribe-company/", {
         company_id: params.listing.id,
       });
-      console.log("Unsubscribed", data);
+      // console.log("Unsubscribed", data);
       showToast("Unsubscribeddddd");
+      setIs_subscribed(false)
     } catch (err) {
-      console.log("Unsubscribed ERROR", err.response?.data);
+      // console.log("Unsubscribed ERROR", err.response?.data);
       showToast("Failed to Unsubscribed", err.response?.data);
     }
   };
@@ -37,7 +40,7 @@ const CompanyScreen = ({ route: { params } }) => {
       <Layout style={{ flex: 1, padding: 10 }}>
         {/* <Text category="h1">Listing</Text> */}
         <Listing listing={params.listing} />
-        {!params.listing.have_i_subscribed ? (
+        {!is_subscribed ? (
           <Button onPress={subscribe}>Subscribe</Button>
         ) : (
           <Button onPress={unsubscribe}>Unsubscribe</Button>

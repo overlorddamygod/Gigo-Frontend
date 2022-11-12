@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
 
   const getAssetDetail = async () => {
     const pk = await AsyncStorage.getItem(`pk_${user.name}`);
-    if (pk){
+    if (pk ){
       try {
         console.log(user.name ,' key is ',pk)
         const { data } = await axiosInstance.post("/users/get-account-asset/", {
@@ -39,10 +39,13 @@ const HomeScreen = ({ navigation }) => {
  
   };
   useEffect(() => {
-    getAssetDetail();
+    if(user.name){
+
+      getAssetDetail();
+    }
     // set_key();
 
-  }, []);
+  }, [user.name]);
 
   const set_key=async ()=>{
     console.log('setting key of ',user.name)
