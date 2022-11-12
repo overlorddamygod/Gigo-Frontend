@@ -39,13 +39,35 @@ const HomeScreen = ({ navigation }) => {
   return (
     <Layout style={{ flex: 1, padding: 10 }}>
       <View style={styles.assetcard}>
+        <View style={{
+          backgroundColor:'#02BA76',
+          borderRadius:50,
+          position:'absolute',
+          height:50,
+          width:50,
+          zIndex:2,
+          right:-5,
+          top:-10
+        }}>
+        </View>
+        <View style={{
+          backgroundColor:'#02BA76',
+          borderRadius:50,
+          position:'absolute',
+          height:30,
+          width:30,
+          zIndex:2,
+          left:-5,
+          bottom:-10
+        }}>
+        </View>
        <View style={{display:'flex',flexDirection:'column',justifyContent:'space-around'}}>
        <Text category="h5">Hello, {user?.name}</Text>
         <Text style={{color:'#444'}} category="h6">Mohor Balance</Text>
        </View>
-        <View>
+        <View style={{display:'flex',flexDirection:'row',alignItems:'flex-end'}}>
           <Image style={styles.mohor_logo} source={MohorCoin} />
-          <Text style={{color:'#444'}} category="h2">{assetDetail?.balance || 20.23}</Text>
+          <Text style={{color:'#444',marginLeft:10,marginBottom:height*0.005}} category="h2">{assetDetail?.balance || 20.23}</Text>
         </View>
       </View>
       <View style={{ marginTop: 10, display: "flex", flexDirection: "row",justifyContent:'space-between' }}>
@@ -77,9 +99,11 @@ const styles = StyleSheet.create({
   assetcard: {
     backgroundColor: "#f5faf7",
     borderColor: "#e1f2e8",
+    postion:'relative',
     borderWidth: 1,
     height: "20%",
     display: "flex",
+    overflow:'hidden',
     padding: width * 0.05,
     borderRadius: width * 0.03,
     flexDirection: "row",
@@ -88,6 +112,7 @@ const styles = StyleSheet.create({
   mohor_logo: {
     width: 50,
     height: 50,
+    
   },
   linkcard: {
     backgroundColor: "#f5faf7",
@@ -104,5 +129,6 @@ const styles = StyleSheet.create({
   linklogo:{
     width: 50,
     height: 50,
+    
   }
 });

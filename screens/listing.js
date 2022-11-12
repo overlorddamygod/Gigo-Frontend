@@ -1,11 +1,19 @@
-import { Layout, Button, Text, Card,Input } from "@ui-kitten/components";
+import {
+  Layout,
+  Button,
+  Text,
+  Card,
+  Input,
+  Avatar,
+} from "@ui-kitten/components";
 import { useState, useEffect } from "react";
 import Listing from "../components/listing";
 import useUserStore from "../store";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import SafeAreaView from "../components/SafeAreaView";
 import { width, height } from "../constant/size";
 import { axiosInstance } from "../utils/axios";
+import { BASE_URL_NOSLASH } from "../constant/urls";
 
 const ListingScreen = ({ navigation }) => {
   const user = useUserStore((state) => state);
@@ -14,13 +22,17 @@ const ListingScreen = ({ navigation }) => {
     // <SafeAreaView>
     <Layout style={{ flex: 1, padding: 10 }}>
       {/* <Text category="h1">Listing</Text> */}
-      {user.role == "Enterprise" ? <UserList /> : <CompanyList navigation={navigation} />}
+      {user.role == "Enterprise" ? (
+        <UserList />
+      ) : (
+        <CompanyList navigation={navigation} />
+      )}
     </Layout>
     // </SafeAreaView>
   );
 };
 
-const CompanyList = ({navigation}) => {
+const CompanyList = ({ navigation }) => {
   const [listings, setListings] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
@@ -71,12 +83,26 @@ const CompanyList = ({navigation}) => {
 
 const UserList = () => {
   const [users, setusers] = useState([]);
+  const [searchInput, setSearchInput] = useState('')
 
   const getUsers = async () => {
     try {
       const { data } = await axiosInstance.get("/wsystem/company-user/");
       setusers(data);
       // console.lo
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const SearchUser = async (e) => {
+    try {
+      console.log(e);
+      setSearchInput(e);
+      const { data } = await axiosInstance.get(
+        `/wsystem/company-user/?search=${e}`
+      );
+      
+      setusers(data);
     } catch (error) {
       console.error(error);
     }
@@ -89,12 +115,38 @@ const UserList = () => {
   }, []);
   return (
     <>
-      {users.map((user) => {
+     <Input
+        style={styles.mg10}
+        value={searchInput}
+        placeholder="Search Users"
+        size="large"
+        onChangeText={SearchUser}
+      ></Input>
+      {users.length > 0 && users.map((user) => {
         return (
-          <Card key={user.customer.id}>
-            <Text>{user.customer.username}</Text>
-            <Text>{user.customer.email}</Text>
-            <Text>{user.customer.avatar}</Text>
+          <Card key={user?.customer?.id}>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Avatar
+                source={{
+                  uri: user?.customer?.avatar,
+                }}
+                style={{
+                  height: 50,
+                  width: 50,
+                }}
+              />
+              <View style={{marginLeft:10}}>
+                <Text category="h6">{user?.customer?.username}</Text>
+                <Text style={{marginVertical:4}}>{user?.customer?.email}</Text>
+                <Text style={{backgroundColor:'#e1f2e8',padding:7,color:'#005659',marginVertical:4}}>Subscribed Date : {user?.subscribed_date}</Text>
+              </View>
+            </View>
           </Card>
         );
       })}
@@ -102,7 +154,6 @@ const UserList = () => {
     // </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
