@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 
 const Listing = ({ navigation, listing }) => {
   return (
-    <Card onPress={() => {
+    <Card style={{marginTop:5}} onPress={() => {
       navigation.navigate("Company", { listing })
     }}>
         <Image style={{height:100}} source={{
@@ -12,7 +12,7 @@ const Listing = ({ navigation, listing }) => {
         <Text category="h5">{listing.name}</Text>
         <Text>{listing.detail}</Text>
   
-        <Text>Rs. {listing.monthly_fee}</Text>
+        <Text>Monthly Fee : Rs.{listing.monthly_fee}</Text>
     </Card>
   )
 }

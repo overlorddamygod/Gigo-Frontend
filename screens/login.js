@@ -96,7 +96,6 @@ const LoginScreen = ({ navigation }) => {
               navigation.navigate("Register");
             }}
           >
-            {" "}
             Register
           </Text>
         </Text>
