@@ -9,6 +9,8 @@ import useUserStore from "../store";
 import MohorCoin from "../assets/mohorcoin.png";
 import Voucher from "../assets/voucher.png";
 import MoneyTransaction from "../assets/money-transaction.png";
+import GarbageIcon from "../assets/garbage.png";
+import GarbageTruck from "../assets/trash-truck.png";
 
 const HomeScreen = ({ navigation }) => {
   const [assetDetail, setAssetDetail] = useState(null);
@@ -49,6 +51,10 @@ const HomeScreen = ({ navigation }) => {
       <View style={{ marginTop: 10, display: "flex", flexDirection: "row",justifyContent:'space-between' }}>
         <LinkCard label='Reedem Rewards' icon={Voucher}/>
         <LinkCard label='Transactions' icon={MoneyTransaction}/>
+      </View>
+      <View style={{ marginTop: 10, display: "flex", flexDirection: "row",justifyContent:'space-between' }}>
+        <LinkCard label='My Subscription' icon={GarbageTruck}/>
+        <LinkCard label='Pickup History' icon={GarbageIcon}/>
       </View>
     </Layout>
   );
