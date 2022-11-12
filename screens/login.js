@@ -88,17 +88,19 @@ const LoginScreen = ({ navigation }) => {
           Login {/* {loading ?    <Spinner size='small'/>:'Login'} */}
         </Button>
 
-        <Text style={{marginTop:20,textAlign:'center',fontWeight:'medium',fontSize:18}}>
+        <View style={{display:'flex',flexDirection:'row',marginTop:20,justifyContent:'center'}}>
+        <Text style={{fontWeight:'medium',fontSize:18}}>
           Don't have an account?
-          <Text
-            style={{ color: "#02BA76", fontWeight: "bold",fontSize:19 }}
+        </Text>
+        <Text
+            style={{ color: "#02BA76", fontWeight: "bold",fontSize:19,marginLeft:9 }}
             onPress={() => {
               navigation.navigate("Register");
             }}
           >
             Register
           </Text>
-        </Text>
+        </View>
       </View>
     </SafeAreaView>
   );

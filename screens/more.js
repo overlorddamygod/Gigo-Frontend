@@ -37,18 +37,20 @@ const MoreScreen = ({ navigation }) => {
         <Text>{user.email}</Text>
       </View>
 
-      <Text style={{padding:height*0.02}}>Transaction History </Text>
+      <Text style={{padding:height*0.02,fontWeight:'bold'}}>Transaction History </Text>
       <Divider/>
-      <Text style={{padding:height*0.02}}>Terms & Conditions </Text>
+      <Text style={{padding:height*0.02,fontWeight:'bold'}}>Terms & Conditions </Text>
       <Divider/>
-      <Text style={{padding:height*0.02}}>Support </Text>
+      <Text style={{padding:height*0.02,fontWeight:'bold'}}>Support </Text>
       <Divider/>
-      <ListItem
-        title={"Logout"}
+      <Text
+        style={{padding:height*0.02,fontWeight:'bold',color:'#f66'}}
         onPress={() => {
           user.logout();
         }}
-      />
+      >Logout</Text>
+            <Divider/>
+
     </Layout>
   );
 };

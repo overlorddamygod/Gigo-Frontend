@@ -89,6 +89,7 @@ const UserList = () => {
     try {
       const { data } = await axiosInstance.get("/wsystem/company-user/");
       setusers(data);
+      console.log('data is ',data)
       // console.lo
     } catch (error) {
       console.error(error);
@@ -122,7 +123,7 @@ const UserList = () => {
         size="large"
         onChangeText={SearchUser}
       ></Input>
-      {users.length > 0 && users.map((user) => {
+      {users.length > 0 ? users.map((user) => {
         return (
           <Card key={user?.customer?.id}>
             <View
@@ -149,7 +150,12 @@ const UserList = () => {
             </View>
           </Card>
         );
-      })}
+      }):
+      <View style={{marginTop:height*0.03,display:'flex',flexDirection:'row',justifyContent:'center'}}>
+        <Text style={{fontWeight:'bold'}}>No Users Yet</Text>
+      </View>
+      
+      }
     </>
     // </SafeAreaView>
   );

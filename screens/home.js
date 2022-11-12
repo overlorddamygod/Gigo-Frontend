@@ -1,6 +1,6 @@
 import { Layout, Button, Text } from "@ui-kitten/components";
 import { useState, useEffect } from "react";
-import { Image, TouchableOpacity } from "react-native";
+import { AsyncStorage, Image, TouchableOpacity } from "react-native";
 import Listing from "../components/listing";
 import { axiosInstance } from "../utils/axios";
 import { View, StyleSheet } from "react-native";
@@ -20,12 +20,13 @@ const HomeScreen = ({ navigation }) => {
 
   const getAssetDetail = async () => {
     try {
+      const pk = await AsyncStorage.getItem(`pk_${user.name}`);
+      console.log(user.name ,' key is ',pk)
       const { data } = await axiosInstance.post("/users/get-account-asset/", {
-        private_key:
-          "9c28f58effcd46a2266d332d5a53198a6a4d7ba2d2dc0fd99640ba95cf8190a1",
+        private_key:pk
       });
       const trashcoin_detail = data.find(
-        (li) => li.assetId === "trashcoin#gigo"
+        (li) => li.assetId === "mohorcoin#gigo"
       );
       setAssetDetail(trashcoin_detail);
     } catch (error) {
@@ -36,40 +37,72 @@ const HomeScreen = ({ navigation }) => {
   };
   useEffect(() => {
     getAssetDetail();
+    // set_key();
+
   }, []);
 
+  const set_key=async ()=>{
+    console.log('setting key of ',user.name)
+    await AsyncStorage.setItem(`pk_${user.name}`, 'f101537e319568c765b2cc89698325604991dca57b9716b58016b253506cab70');
+
+  }
   return (
     <Layout style={{ flex: 1, padding: 10 }}>
       <View style={styles.assetcard}>
-        <View style={{
-          backgroundColor:'#02BA76',
-          borderRadius:50,
-          position:'absolute',
-          height:50,
-          width:50,
-          zIndex:2,
-          right:-5,
-          top:-10
-        }}>
+        <View
+          style={{
+            backgroundColor: "#02BA76",
+            borderRadius: 50,
+            position: "absolute",
+            height: 50,
+            width: 50,
+            zIndex: 2,
+            right: -5,
+            top: -10,
+          }}
+        ></View>
+        <View
+          style={{
+            backgroundColor: "#02BA76",
+            borderRadius: 50,
+            position: "absolute",
+            height: 30,
+            width: 30,
+            zIndex: 2,
+            left: -5,
+            bottom: -10,
+          }}
+        ></View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-around",
+          }}
+        >
+          <Text category="h5">Hello, {user?.name}</Text>
+          <Text style={{ color: "#444" }} category="h6">
+            Mohor Balance
+          </Text>
         </View>
-        <View style={{
-          backgroundColor:'#02BA76',
-          borderRadius:50,
-          position:'absolute',
-          height:30,
-          width:30,
-          zIndex:2,
-          left:-5,
-          bottom:-10
-        }}>
-        </View>
-       <View style={{display:'flex',flexDirection:'column',justifyContent:'space-around'}}>
-       <Text category="h5">Hello, {user?.name}</Text>
-        <Text style={{color:'#444'}} category="h6">Mohor Balance</Text>
-       </View>
-        <View style={{display:'flex',flexDirection:'row',alignItems:'flex-end'}}>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-end",
+          }}
+        >
           <Image style={styles.mohor_logo} source={MohorCoin} />
-          <Text style={{color:'#444',marginLeft:10,marginBottom:height*0.005}} category="h4">{assetDetail?.balance || 20.23}</Text>
+          <Text
+            style={{
+              color: "#444",
+              marginLeft: 10,
+              marginBottom: height * 0.005,
+            }}
+            category="h4"
+          >
+            {assetDetail?.balance || 0.00}
+          </Text>
         </View>
       </View>
       <View
@@ -86,10 +119,14 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => {
             navigation.navigate("Redeem");
           }}
-          />
-        <LinkCard label="Transactions" icon={MoneyTransaction} onPress={() => {
-            navigation.navigate("Transactions")
-          }} />
+        />
+        <LinkCard
+          label="Transactions"
+          icon={MoneyTransaction}
+          onPress={() => {
+            navigation.navigate("Transactions");
+          }}
+        />
       </View>
       <View
         style={{
@@ -98,21 +135,31 @@ const HomeScreen = ({ navigation }) => {
           flexDirection: "row",
           justifyContent: "space-between",
         }}
-        >
+      >
         {user.role == "Customer" ? (
-          <LinkCard label="My Subscription" icon={GarbageTruck} onPress={() => {
-            navigation.navigate("Subscription")
-          }}/>
+          <LinkCard
+            label="My Subscription"
+            icon={GarbageTruck}
+            onPress={() => {
+              navigation.navigate("Subscription");
+            }}
+          />
         ) : (
-          <LinkCard label="Customers" icon={GarbageTruck} 
-          onPress={() => {
-            navigation.navigate("Listing")
-          }}
+          <LinkCard
+            label="Customers"
+            icon={GarbageTruck}
+            onPress={() => {
+              navigation.navigate("Listing");
+            }}
           />
         )}
-        <LinkCard label="Pickup History" icon={GarbageIcon}  onPress={() => {
-            navigation.navigate("PickupHistory")
-          }}/>
+        <LinkCard
+          label="Pickup History"
+          icon={GarbageIcon}
+          onPress={() => {
+            navigation.navigate("PickupHistory");
+          }}
+        />
       </View>
       <View
         style={{
@@ -121,10 +168,16 @@ const HomeScreen = ({ navigation }) => {
           flexDirection: "row",
           justifyContent: "space-between",
         }}
-        >
-       {user.role == "Customer" && <LinkCard label="Waste Company" icon={GarbageTruck} onPress={() => {
-            navigation.navigate("Listing")
-          }}/>}
+      >
+        {user.role == "Customer" && (
+          <LinkCard
+            label="Waste Company"
+            icon={GarbageTruck}
+            onPress={() => {
+              navigation.navigate("Listing");
+            }}
+          />
+        )}
         {/* <LinkCard label="Pickup History" icon={GarbageIcon} /> */}
       </View>
     </Layout>
@@ -135,22 +188,19 @@ export default HomeScreen;
 
 const LinkCard = ({ label, icon, onPress }) => {
   return (
-    <TouchableOpacity
-      style={styles.linkcard}
-      onPress={onPress}
-    >
-        <View
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          <Image style={styles.linklogo} source={icon} />
-          <Text style={{ marginTop: 10, color: "#333" }} category="h6">
-            {label}
-          </Text>
-        </View>
+    <TouchableOpacity style={styles.linkcard} onPress={onPress}>
+      <View
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <Image style={styles.linklogo} source={icon} />
+        <Text style={{ marginTop: 10, color: "#333" }} category="h6">
+          {label}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -159,11 +209,11 @@ const styles = StyleSheet.create({
   assetcard: {
     backgroundColor: "#f5faf7",
     borderColor: "#e1f2e8",
-    postion:'relative',
+    postion: "relative",
     borderWidth: 1,
     height: "20%",
     display: "flex",
-    overflow:'hidden',
+    overflow: "hidden",
     padding: width * 0.05,
     borderRadius: width * 0.03,
     flexDirection: "row",
@@ -172,7 +222,6 @@ const styles = StyleSheet.create({
   mohor_logo: {
     width: 50,
     height: 50,
-    
   },
   linkcard: {
     backgroundColor: "#f5faf7",
@@ -189,6 +238,5 @@ const styles = StyleSheet.create({
   linklogo: {
     width: 50,
     height: 50,
-    
-  }
+  },
 });

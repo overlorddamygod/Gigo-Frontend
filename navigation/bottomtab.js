@@ -31,9 +31,9 @@ const BottomTabNavigator = () => {
 
   return (
     <Navigator tabBar={props => <BottomTabBar {...props} />}>
-      <Screen name="Home" component={HomeScreen}/>
+      <Screen name="Home" component={HomeScreen} options={{unmountOnBlur: true}}/>
       {/* <Screen name={user.role === 'Customer'?'Search Company':'Search Customers'} component={ListingScreen}/> */}
-      <Screen name="Scan" component={ScanScreen} options={{unmountOnBlur: true}}/>
+      <Screen name="Scanner" component={ScanScreen} options={{unmountOnBlur: true}}/>
       <Screen name="More" component={MoreScreen}/>
       {/* <Screen name='Orders' component={OrdersScreen}/> */}
     </Navigator>
