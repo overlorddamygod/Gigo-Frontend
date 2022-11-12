@@ -1,6 +1,6 @@
 import { Layout, Button, Text } from "@ui-kitten/components";
 import { useState, useEffect } from "react";
-import { Image } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import Listing from "../components/listing";
 import { axiosInstance } from "../utils/axios";
 import { View, StyleSheet } from "react-native";
@@ -11,6 +11,8 @@ import Voucher from "../assets/voucher.png";
 import MoneyTransaction from "../assets/money-transaction.png";
 import GarbageIcon from "../assets/garbage.png";
 import GarbageTruck from "../assets/trash-truck.png";
+import { TouchableHighlight } from "react-native-gesture-handler";
+import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 
 const HomeScreen = ({ navigation }) => {
   const [assetDetail, setAssetDetail] = useState(null);
@@ -70,13 +72,39 @@ const HomeScreen = ({ navigation }) => {
           <Text style={{color:'#444',marginLeft:10,marginBottom:height*0.005}} category="h2">{assetDetail?.balance || 20.23}</Text>
         </View>
       </View>
-      <View style={{ marginTop: 10, display: "flex", flexDirection: "row",justifyContent:'space-between' }}>
-        <LinkCard label='Reedem Rewards' icon={Voucher}/>
-        <LinkCard label='Transactions' icon={MoneyTransaction}/>
+      <View
+        style={{
+          marginTop: 10,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <LinkCard
+          label="Reedem Rewards"
+          icon={Voucher}
+          onPress={() => {
+            navigation.navigate("Redeem");
+          }}
+          />
+        <LinkCard label="Transactions" icon={MoneyTransaction} />
       </View>
-      <View style={{ marginTop: 10, display: "flex", flexDirection: "row",justifyContent:'space-between' }}>
-       {user.role == 'Customer'? <LinkCard label='My Subscription' icon={GarbageTruck}/>:<LinkCard label='Customers' icon={GarbageTruck}/>}
-        <LinkCard label='Pickup History' icon={GarbageIcon}/>
+      <View
+        style={{
+          marginTop: 10,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+        >
+        {user.role == "Customer" ? (
+          <LinkCard label="My Subscription" icon={GarbageTruck} onPress={() => {
+            navigation.navigate("Subscription")
+          }}/>
+        ) : (
+          <LinkCard label="Customers" icon={GarbageTruck} />
+        )}
+        <LinkCard label="Pickup History" icon={GarbageIcon} />
       </View>
     </Layout>
   );
@@ -84,16 +112,27 @@ const HomeScreen = ({ navigation }) => {
 
 export default HomeScreen;
 
-const LinkCard = ({label,icon}) =>{
+const LinkCard = ({ label, icon, onPress }) => {
   return (
-    <View style={styles.linkcard}>
-    <View style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
-    <Image style={styles.linklogo} source={icon} />
-        <Text style={{marginTop:10,color:'#333'}} category="h6">{label}</Text>
-    </View>
-    </View>
-  )
-}
+    <TouchableOpacity
+      style={styles.linkcard}
+      onPress={onPress}
+    >
+        <View
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <Image style={styles.linklogo} source={icon} />
+          <Text style={{ marginTop: 10, color: "#333" }} category="h6">
+            {label}
+          </Text>
+        </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   assetcard: {
@@ -118,15 +157,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5faf7",
     padding: 4,
     width: "49%",
-    gap: 5,   
-    borderWidth:1,
+    gap: 5,
+    borderWidth: 1,
     borderColor: "#e1f2e8",
     height: height * 0.17,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
-  linklogo:{
+  linklogo: {
     width: 50,
     height: 50,
     

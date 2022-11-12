@@ -11,6 +11,8 @@ import RewardScreen from "../screens/reward";
 import RegisterScreen from "../screens/register";
 import LoginScreen from "../screens/login";
 import CompanyScreen from "../screens/company";
+import RedeemScreen from "../screens/redeem";
+import SubscriptionScreen from "../screens/subscription";
 
 const MainStack = createStackNavigator();
 
@@ -24,8 +26,18 @@ const LoggedIn = () => {
       <MainStack.Screen options={{
         // header
       }} name="BottomTab" component={BottomTabNavigator} />
-      <MainStack.Screen name="Company" component={CompanyScreen} />
-      <MainStack.Screen name="Reward" component={RewardScreen} />
+      <MainStack.Screen name="Company" component={CompanyScreen} options={{
+        headerShown: true
+      }} />
+      <MainStack.Screen name="Subscription" component={SubscriptionScreen} options={{
+        headerShown: true
+      }} />
+      <MainStack.Screen name="Reward" component={RewardScreen} options={{
+        headerShown: true
+      }} />
+      <MainStack.Screen name="Redeem" component={RedeemScreen} options={{
+        headerShown: true
+      }} />
     </MainStack.Navigator>
   );
 };
