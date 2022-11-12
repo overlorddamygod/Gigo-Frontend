@@ -104,7 +104,11 @@ const HomeScreen = ({ navigation }) => {
             navigation.navigate("Subscription")
           }}/>
         ) : (
-          <LinkCard label="Customers" icon={GarbageTruck} />
+          <LinkCard label="Customers" icon={GarbageTruck} 
+          onPress={() => {
+            navigation.navigate("Listing")
+          }}
+          />
         )}
         <LinkCard label="Pickup History" icon={GarbageIcon}  onPress={() => {
             navigation.navigate("PickupHistory")
@@ -118,9 +122,9 @@ const HomeScreen = ({ navigation }) => {
           justifyContent: "space-between",
         }}
         >
-        <LinkCard label="Waste Company" icon={GarbageTruck} onPress={() => {
+       {user.role == "Customer" && <LinkCard label="Waste Company" icon={GarbageTruck} onPress={() => {
             navigation.navigate("Listing")
-          }}/>
+          }}/>}
         {/* <LinkCard label="Pickup History" icon={GarbageIcon} /> */}
       </View>
     </Layout>
