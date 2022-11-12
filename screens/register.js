@@ -104,13 +104,14 @@ const RegisterScreen = ({ navigation }) => {
           placeholder="Password"
           style={styles.mg10}
           size="large"
-          type=""
+          secureTextEntry={true}
           onChangeText={(nextValue) => setPassword1(nextValue)}
         ></Input>
         <Input
           value={password2}
           placeholder="Confirm Password"
-          style={styles.mg10}
+          style={styles.mg10} 
+          secureTextEntry={true}
           size="large"
           onChangeText={(nextValue) => setPassword2(nextValue)}
         ></Input>

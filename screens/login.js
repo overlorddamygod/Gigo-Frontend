@@ -73,8 +73,9 @@ const LoginScreen = ({ navigation }) => {
         <Input
           style={styles.mg10}
           value={password}
-          keyboardType={'visible-password'}
+          type={'password'}
           size="large"
+          secureTextEntry={true}
           placeholder="Password"
           onChangeText={(nextValue) => setPassword(nextValue)}
         ></Input>
