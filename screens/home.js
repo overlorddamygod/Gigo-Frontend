@@ -19,21 +19,24 @@ const HomeScreen = ({ navigation }) => {
   const user = useUserStore((store) => store);
 
   const getAssetDetail = async () => {
-    try {
-      const pk = await AsyncStorage.getItem(`pk_${user.name}`);
-      console.log(user.name ,' key is ',pk)
-      const { data } = await axiosInstance.post("/users/get-account-asset/", {
-        private_key:pk
-      });
-      const trashcoin_detail = data.find(
-        (li) => li.assetId === "mohorcoin#gigo"
-      );
-      setAssetDetail(trashcoin_detail);
-    } catch (error) {
-      // console.log(JSON.stringify(error))
-      console.log(error?.response?.data);
-      console.error("error is ", error);
+    const pk = await AsyncStorage.getItem(`pk_${user.name}`);
+    if (pk){
+      try {
+        console.log(user.name ,' key is ',pk)
+        const { data } = await axiosInstance.post("/users/get-account-asset/", {
+          private_key:pk
+        });
+        const trashcoin_detail = data.find(
+          (li) => li.assetId === "mohorcoin#gigo"
+        );
+        setAssetDetail(trashcoin_detail);
+      } catch (error) {
+        // console.log(JSON.stringify(error))
+        console.log(error?.response?.data);
+        console.error("error is ", error);
+      }
     }
+ 
   };
   useEffect(() => {
     getAssetDetail();

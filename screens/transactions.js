@@ -14,20 +14,22 @@ const TransactionsScreen = ({ navigation }) => {
   // 'users/account-transactions/'
 
   const getTransactions = async () => {
-    try {
-      const pk = await AsyncStorage.getItem(`pk_${user.name}`);
-
-      const { data } = await axiosInstance.post(
-        "/users/account-transactions/",
-        {
-          private_key: pk,
-        }
-      );
-      console.log("transaction is ", data.transactions);
-      setTransactions(data.transactions);
-    } catch (error) {
-      console.error(error);
+    const pk = await AsyncStorage.getItem(`pk_${user.name}`);
+    if (pk){
+      try {
+        const { data } = await axiosInstance.post(
+          "/users/account-transactions/",
+          {
+            private_key: pk,
+          }
+        );
+        console.log("transaction is ", data.transactions);
+        setTransactions(data.transactions);
+      } catch (error) {
+        console.error(error);
+      }
     }
+  
   };
   useEffect(() => {
     getTransactions();
