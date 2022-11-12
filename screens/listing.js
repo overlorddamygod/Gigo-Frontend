@@ -1,4 +1,4 @@
-import { Layout, Button, Text, Card } from "@ui-kitten/components";
+import { Layout, Button, Text, Card,Input } from "@ui-kitten/components";
 import { useState, useEffect } from "react";
 import Listing from "../components/listing";
 import useUserStore from "../store";

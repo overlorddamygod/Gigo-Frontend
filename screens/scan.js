@@ -156,20 +156,34 @@ const MyQR = () => {
       {/* <Text>My QR</Text> */}
       <Layout style={{
         flex:1,
-        // backgroundColor:"red",
+        backgroundColor:"#333",
         justifyContent:"center",
         alignItems:"center",
-        padding:20
+        padding:20,
+        marginTop:height*0.1,
+        borderTopEndRadius:height*0.1,
+        borderTopStartRadius:height*0.1
         // height: 100,
         // width:100,
       }}>
+        <View
+        style={{
+          background:'white',
+          height: height * 0.26,
+           width:height * 0.26 ,
+        }}
+        >
         <Image
-          style={{ height: height * 0.4, width:height * 0.4 }}
+          style={{ height:'100%',backgroundColor:'white'}}
           source={{
             uri: BASE_URL_NOSLASH + user.qrCode,
           }}
         />
-        <Text category="h5">{user.name}</Text>
+        </View>
+       <View style={{marginTop:20}}>
+       <Text  style={{color:'white',textAlign:'center'}} category="h6">{user.name}</Text>
+       <Text  style={{color:'white'}} category="h6">{user.email}</Text>
+       </View>
         {/* <Text>{user.name}</Text> */}
       </Layout>
     </>
