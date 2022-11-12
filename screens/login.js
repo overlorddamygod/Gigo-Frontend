@@ -38,8 +38,9 @@ const LoginScreen = ({ navigation }) => {
       console.log("SADD", data.access);
       setToken(data.access);
     } catch (err) {
+      const error_msg = err?.response?.data?.detail || 'Something Went Wrong'
       // console.error(JSON.stringify(err))
-      showToast("LOGIN ERROR");
+      showToast(error_msg)
     } finally {
       setLoading(false);
     }
