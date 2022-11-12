@@ -69,7 +69,7 @@ const HomeScreen = ({ navigation }) => {
        </View>
         <View style={{display:'flex',flexDirection:'row',alignItems:'flex-end'}}>
           <Image style={styles.mohor_logo} source={MohorCoin} />
-          <Text style={{color:'#444',marginLeft:10,marginBottom:height*0.005}} category="h2">{assetDetail?.balance || 20.23}</Text>
+          <Text style={{color:'#444',marginLeft:10,marginBottom:height*0.005}} category="h4">{assetDetail?.balance || 20.23}</Text>
         </View>
       </View>
       <View
@@ -87,7 +87,9 @@ const HomeScreen = ({ navigation }) => {
             navigation.navigate("Redeem");
           }}
           />
-        <LinkCard label="Transactions" icon={MoneyTransaction} />
+        <LinkCard label="Transactions" icon={MoneyTransaction} onPress={() => {
+            navigation.navigate("Transactions")
+          }} />
       </View>
       <View
         style={{
@@ -104,7 +106,22 @@ const HomeScreen = ({ navigation }) => {
         ) : (
           <LinkCard label="Customers" icon={GarbageTruck} />
         )}
-        <LinkCard label="Pickup History" icon={GarbageIcon} />
+        <LinkCard label="Pickup History" icon={GarbageIcon}  onPress={() => {
+            navigation.navigate("PickupHistory")
+          }}/>
+      </View>
+      <View
+        style={{
+          marginTop: 10,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+        >
+        <LinkCard label="Waste Company" icon={GarbageTruck} onPress={() => {
+            navigation.navigate("Listing")
+          }}/>
+        {/* <LinkCard label="Pickup History" icon={GarbageIcon} /> */}
       </View>
     </Layout>
   );

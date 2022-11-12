@@ -19,7 +19,7 @@ return (
       <BottomNavigationTab title='Home' icon={() => {
         return <AntDesign name="home" size={24} color="black" />
       }}/>
-      <BottomNavigationTab title='Search' icon={<AntDesign name="search1" size={24} color="black" />}/>
+      {/* <BottomNavigationTab title='Search' icon={<AntDesign name="search1" size={24} color="black" />}/> */}
       <BottomNavigationTab title='Scan' icon={<AntDesign name="qrcode" size={24} color="black" />}/>
       <BottomNavigationTab title='More' icon={<Feather name="more-horizontal" size={24} color="black" />}/>
       {/* <BottomNavigationTab title='ORDERS'/> */}
@@ -32,7 +32,7 @@ const BottomTabNavigator = () => {
   return (
     <Navigator tabBar={props => <BottomTabBar {...props} />}>
       <Screen name="Home" component={HomeScreen}/>
-      <Screen name={user.role === 'Customer'?'Search Company':'Search Customers'} component={ListingScreen}/>
+      {/* <Screen name={user.role === 'Customer'?'Search Company':'Search Customers'} component={ListingScreen}/> */}
       <Screen name="Scan" component={ScanScreen} options={{unmountOnBlur: true}}/>
       <Screen name="More" component={MoreScreen}/>
       {/* <Screen name='Orders' component={OrdersScreen}/> */}

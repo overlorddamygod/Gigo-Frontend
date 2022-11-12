@@ -13,6 +13,8 @@ import LoginScreen from "../screens/login";
 import CompanyScreen from "../screens/company";
 import RedeemScreen from "../screens/redeem";
 import SubscriptionScreen from "../screens/subscription";
+import TransactionsScreen from "../screens/transactions";
+import PickupHistoryScreen from "../screens/pickupHistory";
 
 const MainStack = createStackNavigator();
 
@@ -36,6 +38,15 @@ const LoggedIn = () => {
         headerShown: true
       }} />
       <MainStack.Screen name="Redeem" component={RedeemScreen} options={{
+        headerShown: true
+      }} />
+      <MainStack.Screen name="Listing" component={ListingScreen} options={{
+        headerShown: true
+      }} />
+      <MainStack.Screen name="Transactions" component={TransactionsScreen} options={{
+        headerShown: true
+      }} />
+      <MainStack.Screen name="PickupHistory" component={PickupHistoryScreen} options={{
         headerShown: true
       }} />
     </MainStack.Navigator>
