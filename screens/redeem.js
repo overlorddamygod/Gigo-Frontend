@@ -6,6 +6,9 @@ import { axiosInstance } from "../utils/axios";
 import showToast from "../utils/toast";
 import { AsyncStorage, Image, View } from "react-native";
 import VoucherIcon from "../assets/voucher.png";
+import { width } from "../constant/size";
+import MohorCoin from "../assets/mohorcoin.png";
+import RedeemCard from "../components/RedeemCard";
 
 const RedeemScreen = ({ route: { params } }) => {
   const user = useUserStore((store) => store);
@@ -13,22 +16,10 @@ const RedeemScreen = ({ route: { params } }) => {
   return (
     // <SafeAreaView>
     <>
-      <Card>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <View>
-            <Image source={VoucherIcon} style={{ width: 50, height: 100 }} />
-          </View>
-          <View>
-            <Text>Bigmart 10% off voucher</Text>
-            <Text>10 MohorCoin</Text>
-          </View>
-        </View>
-      </Card>
+      <RedeemCard title="Worldlink 15% off voucher" mohorCoin={10}/>
+      <RedeemCard title="Bigmart 10% off voucher" mohorCoin={20}/>
+      <RedeemCard title="Bigmart 10% off voucher" mohorCoin={30}/>
+      <RedeemCard title="Bigmart 10% off voucher" mohorCoin={40}/>
     </>
     // </SafeAreaView>
   );
