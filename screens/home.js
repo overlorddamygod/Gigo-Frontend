@@ -53,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
         <LinkCard label='Transactions' icon={MoneyTransaction}/>
       </View>
       <View style={{ marginTop: 10, display: "flex", flexDirection: "row",justifyContent:'space-between' }}>
-        <LinkCard label='My Subscription' icon={GarbageTruck}/>
+       {user.role == 'Customer'? <LinkCard label='My Subscription' icon={GarbageTruck}/>:<LinkCard label='Customers' icon={GarbageTruck}/>}
         <LinkCard label='Pickup History' icon={GarbageIcon}/>
       </View>
     </Layout>

@@ -37,8 +37,6 @@ const ScanScreen = ({ navigation }) => {
         }}
       >
         <ButtonGroup style={{
-          // borderColor:'#02BA76',
-          // outlineColor:'#02BA76',
           borderWidth:0,
           marginBottom: 10
         }} >
@@ -47,8 +45,7 @@ const ScanScreen = ({ navigation }) => {
               setActive(QrTabStates.SCAN);
             }}
             style={{
-              backgroundColor:'#02BA76',
-              borderColor:'#02BA76',
+
               opacity: active === QrTabStates.SCAN ? 1 : 0.5,
             }}
             // appearance={active == QrTabStates.SCAN ? "filled" : "outline"}

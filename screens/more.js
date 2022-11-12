@@ -1,6 +1,15 @@
-import { Layout, Button, Text, List, ListItem, Avatar } from "@ui-kitten/components";
+import {
+  Layout,
+  Button,
+  Divider,
+  Text,
+  List,
+  ListItem,
+  Avatar,
+} from "@ui-kitten/components";
 import { View } from "react-native";
-import { BASE_URL } from "../constant/urls";
+import { height } from "../constant/size";
+import { BASE_URL_NOSLASH } from "../constant/urls";
 import useUserStore from "../store";
 
 const MoreScreen = ({ navigation }) => {
@@ -8,20 +17,38 @@ const MoreScreen = ({ navigation }) => {
 
   return (
     <Layout style={{ flex: 1 }}>
-      <View>
-      <Avatar source={{
-        uri: BASE_URL +user.avatar
-      }}/>
-        <Text category="h1">{user.name}</Text>
-        <Text category="h1">{user.email}</Text>
+      <View
+        style={{
+          alignItems: "center",
+          marginVertical: 15,
+        }}
+      >
+        <Avatar
+          source={{
+            uri: BASE_URL_NOSLASH + user.avatar,
+          }}
+          style={{
+            height: 100,
+            width: 100,
+          }}
+        />
+        <Text category="h4">{user.name}</Text>
+
+        <Text>{user.email}</Text>
       </View>
 
-          <ListItem title={"Transaction History"} />
-          <ListItem title={"Terms and Conditions"} />
-          <ListItem title={"Support"} />
-          <ListItem title={"Logout"} onPress={() => {
-            user.logout();
-          }}/>
+      <Text style={{padding:height*0.02}}>Transaction History </Text>
+      <Divider/>
+      <Text style={{padding:height*0.02}}>Terms & Conditions </Text>
+      <Divider/>
+      <Text style={{padding:height*0.02}}>Support </Text>
+      <Divider/>
+      <ListItem
+        title={"Logout"}
+        onPress={() => {
+          user.logout();
+        }}
+      />
     </Layout>
   );
 };
