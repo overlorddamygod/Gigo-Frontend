@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { View, Image } from "react-native";
 import useUserStore from "../store";
 import {  BASE_URL_NOSLASH } from "../constant/urls";
+import { height } from "../constant/size";
 
 const QrTabStates = {
   SCAN: "SCAN",
@@ -35,12 +36,22 @@ const ScanScreen = ({ navigation }) => {
           alignItems: "center",
         }}
       >
-        <ButtonGroup>
+        <ButtonGroup style={{
+          // borderColor:'#02BA76',
+          // outlineColor:'#02BA76',
+          borderWidth:0,
+          marginBottom: 10
+        }} >
           <Button
             onPress={() => {
               setActive(QrTabStates.SCAN);
             }}
-            appearance={active == QrTabStates.SCAN ? "filled" : "outline"}
+            style={{
+              backgroundColor:'#02BA76',
+              borderColor:'#02BA76',
+              opacity: active === QrTabStates.SCAN ? 1 : 0.5,
+            }}
+            // appearance={active == QrTabStates.SCAN ? "filled" : "outline"}
           >
             Scan QR
           </Button>
@@ -48,7 +59,13 @@ const ScanScreen = ({ navigation }) => {
             onPress={() => {
               setActive(QrTabStates.MYQR);
             }}
-            appearance={active == QrTabStates.MYQR ? "filled" : "outline"}
+            style={{
+              backgroundColor:'#02BA76',
+              borderColor:'#02BA76',
+              opacity: active === QrTabStates.MYQR ? 1 : 0.5,
+
+            }}
+            // appearance={active == QrTabStates.MYQR ? "filled" : "outline"}
           >
             My QR
           </Button>
@@ -120,7 +137,7 @@ const ScanQR = ({ navigation }) => {
           >
             <Layout>
               <TouchableOpacity onPress={toggleCameraType}>
-                <Text>Flip Camera</Text>
+                {/* <Text>Flip Camera</Text> */}
               </TouchableOpacity>
             </Layout>
           </Camera>
@@ -133,10 +150,10 @@ const ScanQR = ({ navigation }) => {
 };
 
 const MyQR = () => {
-  const qr = useUserStore((store) => store.qrCode)
+  const user = useUserStore((store) => store)
   return (
     <>
-      <Text>My QR</Text>
+      {/* <Text>My QR</Text> */}
       <Layout style={{
         flex:1,
         // backgroundColor:"red",
@@ -147,11 +164,13 @@ const MyQR = () => {
         // width:100,
       }}>
         <Image
-          style={{ height: 200, width:200 }}
+          style={{ height: height * 0.4, width:height * 0.4 }}
           source={{
-            uri: BASE_URL_NOSLASH + qr,
+            uri: BASE_URL_NOSLASH + user.qrCode,
           }}
         />
+        <Text category="h5">{user.name}</Text>
+        {/* <Text>{user.name}</Text> */}
       </Layout>
     </>
   );
